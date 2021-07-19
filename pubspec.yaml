@@ -1,0 +1,61 @@
+name: tokenizer
+description: Mostafa Fahimi base project which contains tools for starting a new project
+version: 0.0.1
+#homepage: 
+
+environment:
+  sdk: ">=2.13.4 <3.0.0"
+  flutter: ">=2.2.3"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_screenutil: ^5.0.0
+  flash: ^1.5.1
+  get: ^4.1.4
+  getwidget: ^2.0.3
+  json_annotation: ^4.0.1
+  loading_animations: ^2.2.0
+  ndialog: ^4.0.1
+  supercharged: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  freezed: ^0.14.1+2
+  json_serializable: ^4.1.0
+  lint: ^1.5.3
+  build_runner:
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+
+  fonts:
+    - family: kara
+      fonts:
+        - asset: assets/fonts/sgkara_regular.ttf
+          weight: 400
+        - asset: assets/fonts/sgkara_light.ttf
+          weight: 300
+    - family: IRANSans
+      fonts:
+        - asset: assets/fonts/IRANSansBold.ttf
+          weight: 700
+        - asset: assets/fonts/IRANSansMedium.ttf
+          weight: 500
+        - asset: assets/fonts/IRANSans.ttf
+          weight: 400
+        - asset: assets/fonts/IRANSansLight.ttf
+          weight: 300
+        - asset: assets/fonts/IRANSansUltraLight.ttf
+          weight: 200
+    - family: wyekan
+      fonts:
+        - asset: assets/fonts/w_yekan_bold.ttf
+          weight: 700
+        - asset: assets/fonts/w_yekan.ttf
+          weight: 400
