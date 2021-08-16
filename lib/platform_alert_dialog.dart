@@ -50,7 +50,6 @@ class PlatformAlertDialog extends PlatformWidget {
     final result = await Get.dialog(
       this,
       barrierDismissible: false,
-      useRootNavigator: true,
     ) as bool;
     return Future.value(result);
   }
