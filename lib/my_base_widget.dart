@@ -10,6 +10,7 @@ class MyBaseWidget extends StatelessWidget {
   final Key? scaffoldKey;
   final Color? backgroundColor;
   final bool hasSafeArea;
+  final bool hasScrollView;
 
   const MyBaseWidget({
     Key? key,
@@ -22,6 +23,7 @@ class MyBaseWidget extends StatelessWidget {
     this.scaffoldKey,
     this.backgroundColor,
     this.hasSafeArea = false,
+    this.hasScrollView = true,
   }) : super(key: key);
 
   @override
@@ -33,13 +35,7 @@ class MyBaseWidget extends StatelessWidget {
               backgroundColor: backgroundColor,
               appBar: platformAppBar,
               drawer: drawer,
-              body: SingleChildScrollView(
-                child: MyResponsive(
-                  mobile: mobileChild,
-                  tablet: tabletChild ?? mobileChild,
-                  desktop: desktopChild ?? mobileChild,
-                ),
-              ),
+              body: hasScrollView ? _buildWithScrollView() : _buildWithoutScrollView(),
               bottomNavigationBar: bottomNavigationBar,
             ),
           )
@@ -48,15 +44,27 @@ class MyBaseWidget extends StatelessWidget {
             backgroundColor: backgroundColor,
             appBar: platformAppBar,
             drawer: drawer,
-            body: SingleChildScrollView(
-              child: MyResponsive(
-                mobile: mobileChild,
-                tablet: tabletChild ?? mobileChild,
-                desktop: desktopChild ?? mobileChild,
-              ),
-            ),
+            body: hasScrollView ? _buildWithScrollView() : _buildWithoutScrollView(),
             bottomNavigationBar: bottomNavigationBar,
           );
+  }
+
+  Widget _buildWithoutScrollView() {
+    return MyResponsive(
+      mobile: mobileChild,
+      tablet: tabletChild ?? mobileChild,
+      desktop: desktopChild ?? mobileChild,
+    );
+  }
+
+  Widget _buildWithScrollView() {
+    return SingleChildScrollView(
+      child: MyResponsive(
+        mobile: mobileChild,
+        tablet: tabletChild ?? mobileChild,
+        desktop: desktopChild ?? mobileChild,
+      ),
+    );
   }
 }
 
