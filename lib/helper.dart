@@ -36,12 +36,11 @@ void showToast(
       return Flash(
         controller: controller,
         backgroundColor: color,
+        behavior: FlashBehavior.floating,
         borderRadius: BorderRadius.circular(8.0.w),
         borderColor: Colors.white,
         position: FlashPosition.bottom,
         margin: sma(bottom: 30.h),
-        style: FlashStyle.floating,
-        enableDrag: false,
         onTap: () => controller.dismiss(),
         child: Padding(
           padding: ama(12.w),
