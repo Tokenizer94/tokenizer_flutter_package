@@ -9,6 +9,7 @@ class MyBaseWidget extends StatelessWidget {
   final Widget? drawer;
   final Key? scaffoldKey;
   final Color? backgroundColor;
+  final bool hasSafeArea;
 
   const MyBaseWidget({
     Key? key,
@@ -20,24 +21,42 @@ class MyBaseWidget extends StatelessWidget {
     this.drawer,
     this.scaffoldKey,
     this.backgroundColor,
+    this.hasSafeArea = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return PlatformScaffold(
-      scaffoldKey: scaffoldKey,
-      backgroundColor: backgroundColor,
-      appBar: platformAppBar,
-      drawer: drawer,
-      body: SingleChildScrollView(
-        child: MyResponsive(
-          mobile: mobileChild,
-          tablet: tabletChild ?? mobileChild,
-          desktop: desktopChild ?? mobileChild,
-        ),
-      ),
-      bottomNavigationBar: bottomNavigationBar,
-    );
+    return hasSafeArea
+        ? SafeArea(
+            child: PlatformScaffold(
+              scaffoldKey: scaffoldKey,
+              backgroundColor: backgroundColor,
+              appBar: platformAppBar,
+              drawer: drawer,
+              body: SingleChildScrollView(
+                child: MyResponsive(
+                  mobile: mobileChild,
+                  tablet: tabletChild ?? mobileChild,
+                  desktop: desktopChild ?? mobileChild,
+                ),
+              ),
+              bottomNavigationBar: bottomNavigationBar,
+            ),
+          )
+        : PlatformScaffold(
+            scaffoldKey: scaffoldKey,
+            backgroundColor: backgroundColor,
+            appBar: platformAppBar,
+            drawer: drawer,
+            body: SingleChildScrollView(
+              child: MyResponsive(
+                mobile: mobileChild,
+                tablet: tabletChild ?? mobileChild,
+                desktop: desktopChild ?? mobileChild,
+              ),
+            ),
+            bottomNavigationBar: bottomNavigationBar,
+          );
   }
 }
 
