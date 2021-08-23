@@ -2,15 +2,15 @@ part of tokenizer;
 
 class PlatformScaffold extends PlatformWidget {
   final Key? scaffoldKey;
-  final PlatformAppBar appBar;
+  final PlatformAppBar? appBar;
   final Color? backgroundColor;
   final Widget body;
   final Widget? drawer;
   final Widget? bottomNavigationBar;
 
   const PlatformScaffold({
-    required this.appBar,
     required this.body,
+    this.appBar,
     this.scaffoldKey,
     this.backgroundColor,
     this.drawer,
@@ -22,7 +22,7 @@ class PlatformScaffold extends PlatformWidget {
     return CupertinoPageScaffold(
       key: scaffoldKey,
       backgroundColor: backgroundColor ?? Colors.white,
-      navigationBar: appBar.buildCupertinoWidget(context) as ObstructingPreferredSizeWidget,
+      navigationBar: appBar?.buildCupertinoWidget(context) as ObstructingPreferredSizeWidget?,
       child: body,
     );
   }
@@ -34,7 +34,7 @@ class PlatformScaffold extends PlatformWidget {
       backgroundColor: backgroundColor ?? Colors.blueGrey,
       drawer: drawer,
       bottomNavigationBar: bottomNavigationBar,
-      appBar: appBar.buildMaterialWidget(context) as PreferredSizeWidget,
+      appBar: appBar?.buildMaterialWidget(context) as PreferredSizeWidget?,
       body: body,
     );
   }

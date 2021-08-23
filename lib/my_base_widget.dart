@@ -4,7 +4,7 @@ class MyBaseWidget extends StatelessWidget {
   final Widget mobileChild;
   final Widget? tabletChild;
   final Widget? desktopChild;
-  final PlatformAppBar platformAppBar;
+  final PlatformAppBar? platformAppBar;
   final Widget? bottomNavigationBar;
   final Widget? drawer;
   final Key? scaffoldKey;
@@ -15,7 +15,7 @@ class MyBaseWidget extends StatelessWidget {
     required this.mobileChild,
     this.tabletChild,
     this.desktopChild,
-    required this.platformAppBar,
+    this.platformAppBar,
     this.bottomNavigationBar,
     this.drawer,
     this.scaffoldKey,
