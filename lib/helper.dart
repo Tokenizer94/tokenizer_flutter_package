@@ -1,5 +1,13 @@
 part of tokenizer;
 
+enum FontWeights {
+  ultraLight,
+  light,
+  regular,
+  medium,
+  bold,
+}
+
 EdgeInsets ama(num number) {
   return EdgeInsets.all(
     ScreenUtil().setWidth(number),
@@ -22,55 +30,30 @@ EdgeInsets syma({num? horizontal, num? vertical}) {
   );
 }
 
-CustomProgressDialog? progressDialog;
-
-void showToast(
-  BuildContext mContext,
-  String message, {
-  Color color = Colors.blue,
+TextStyle fontCreator({
+  double fontSize = 16.0,
+  FontWeights fontWeights = FontWeights.regular,
+  Color fontColor = Colors.white,
+  String fontName = wyekanFontName,
+  double? lineHeight,
+  List<Shadow>? shadow,
 }) {
-  showFlash(
-    context: mContext,
-    duration: 3.seconds,
-    builder: (_, controller) {
-      return Flash(
-        controller: controller,
-        backgroundColor: color,
-        behavior: FlashBehavior.floating,
-        borderRadius: BorderRadius.circular(8.0.w),
-        borderColor: Colors.white,
-        position: FlashPosition.bottom,
-        margin: sma(bottom: 30.h),
-        onTap: () => controller.dismiss(),
-        child: Padding(
-          padding: ama(12.w),
-          child: Text(
-            message,
-            style: AppTheme.fontCreator(fontSize: 14),
-          ),
-        ),
-      );
-    },
+  return TextStyle(
+    fontSize: fontSize.sp,
+    color: fontColor,
+    fontFamily: fontName,
+    height: lineHeight,
+    shadows: shadow,
+    fontWeight: fontWeights == FontWeights.ultraLight
+        ? FontWeight.w200
+        : fontWeights == FontWeights.light
+            ? FontWeight.w300
+            : fontWeights == FontWeights.regular
+                ? FontWeight.w400
+                : fontWeights == FontWeights.medium
+                    ? FontWeight.w500
+                    : fontWeights == FontWeights.bold
+                        ? FontWeight.w700
+                        : FontWeight.w400,
   );
-}
-
-Future<void> showLoading(BuildContext context, Function job) async {
-  progressDialog = CustomProgressDialog(
-    context,
-    blur: 10,
-    dismissable: false,
-    loadingWidget: LoadingBouncingGrid.circle(
-      backgroundColor: Colors.white,
-      size: 60,
-    ),
-  );
-  progressDialog?.show();
-  await job();
-  await Future.delayed(500.milliseconds).then((value) {
-    dismissLoading();
-  });
-}
-
-void dismissLoading() {
-  if (progressDialog != null) progressDialog?.dismiss();
 }

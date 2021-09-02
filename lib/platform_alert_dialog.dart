@@ -18,7 +18,7 @@ class PlatformAlertDialog extends PlatformWidget {
     return AlertDialog(
       title: title,
       content: content,
-      actions: _actions(cancelText?.toUpperCase(), confirmText.toUpperCase()),
+      actions: _actions(context, cancelText?.toUpperCase(), confirmText.toUpperCase()),
     );
   }
 
@@ -27,35 +27,37 @@ class PlatformAlertDialog extends PlatformWidget {
     return CupertinoAlertDialog(
       title: title,
       content: content,
-      actions: _actions(cancelText, confirmText),
+      actions: _actions(context, cancelText, confirmText),
     );
   }
 
-  List<Widget> _actions(String? cancelText, String confirmText) {
+  List<Widget> _actions(BuildContext context, String? cancelText, String confirmText) {
     final actions = <Widget>[];
     if (cancelText != null) {
       actions.add(PlatformAlertDialogAction(
-        onPressed: () => _dismiss(false),
+        onPressed: () => _dismiss(context, false),
         child: Text(cancelText),
       ));
     }
     actions.add(PlatformAlertDialogAction(
-      onPressed: () => _dismiss(true),
+      onPressed: () => _dismiss(context, true),
       child: Text(confirmText),
     ));
     return actions;
   }
 
-  Future<bool> show() async {
-    final result = await Get.dialog(
-      this,
-      barrierDismissible: false,
-    ) as bool;
+  Future<bool> show(BuildContext context) async {
+    final result = await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return this;
+        }) as bool;
     return Future.value(result);
   }
 
-  void _dismiss( bool value) {
-    Get.back(result: value);
+  void _dismiss(BuildContext context, bool value) {
+    Navigator.pop(context, value);
   }
 }
 
