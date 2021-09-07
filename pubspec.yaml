@@ -1,6 +1,6 @@
 name: tokenizer
 description: Mostafa Fahimi base project which contains tools for starting a new project
-version: 0.0.7
+version: 1.0.0
 
 environment:
   sdk: ">=2.13.4 <3.0.0"

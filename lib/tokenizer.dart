@@ -12,5 +12,5 @@ part 'platform_appbar.dart';
 part 'platform_button.dart';
 part 'platform_alert_dialog.dart';
 part 'my_base_widget.dart';
-part 'helper.dart';
+part 'text_style_generator.dart';
 part 'constants.dart';
