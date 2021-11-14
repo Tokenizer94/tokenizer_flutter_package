@@ -22,7 +22,8 @@ class PlatformScaffold extends PlatformWidget {
     return CupertinoPageScaffold(
       key: scaffoldKey,
       backgroundColor: backgroundColor ?? Colors.white,
-      navigationBar: appBar?.buildCupertinoWidget(context) as ObstructingPreferredSizeWidget?,
+      navigationBar: appBar?.buildCupertinoWidget(context)
+          as ObstructingPreferredSizeWidget?,
       child: Material(
         type: MaterialType.transparency,
         child: body,

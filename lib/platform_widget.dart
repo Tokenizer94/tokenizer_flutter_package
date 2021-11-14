@@ -1,6 +1,6 @@
 part of tokenizer;
 
-//? Base class to be extended by all platform aware widgets
+/// Base class to be extended by all platform aware widgets
 abstract class PlatformWidget extends StatelessWidget {
   Widget buildCupertinoWidget(BuildContext context);
   Widget buildMaterialWidget(BuildContext context);
@@ -10,10 +10,11 @@ abstract class PlatformWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
-      //? Use Cupertino on iOS
+      /// Use Cupertino on iOS
       return buildCupertinoWidget(context);
     }
-    //? Use Material design on Android and other platforms
+
+    /// Use Material design on Android and other platforms
     return buildMaterialWidget(context);
   }
 }

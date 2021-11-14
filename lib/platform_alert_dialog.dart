@@ -18,7 +18,11 @@ class PlatformAlertDialog extends PlatformWidget {
     return AlertDialog(
       title: title,
       content: content,
-      actions: _actions(context, cancelText?.toUpperCase(), confirmText.toUpperCase()),
+      actions: _actions(
+        context,
+        cancelText?.toUpperCase(),
+        confirmText.toUpperCase(),
+      ),
     );
   }
 
@@ -31,28 +35,37 @@ class PlatformAlertDialog extends PlatformWidget {
     );
   }
 
-  List<Widget> _actions(BuildContext context, String? cancelText, String confirmText) {
+  List<Widget> _actions(
+    BuildContext context,
+    String? cancelText,
+    String confirmText,
+  ) {
     final actions = <Widget>[];
     if (cancelText != null) {
-      actions.add(PlatformAlertDialogAction(
-        onPressed: () => _dismiss(context, false),
-        child: Text(cancelText),
-      ));
+      actions.add(
+        PlatformAlertDialogAction(
+          onPressed: () => _dismiss(context, false),
+          child: Text(cancelText),
+        ),
+      );
     }
-    actions.add(PlatformAlertDialogAction(
-      onPressed: () => _dismiss(context, true),
-      child: Text(confirmText),
-    ));
+    actions.add(
+      PlatformAlertDialogAction(
+        onPressed: () => _dismiss(context, true),
+        child: Text(confirmText),
+      ),
+    );
     return actions;
   }
 
   Future<bool> show(BuildContext context) async {
     final result = await showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return this;
-        }) as bool;
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return this;
+      },
+    ) as bool;
     return Future.value(result);
   }
 
