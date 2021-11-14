@@ -29,31 +29,47 @@ class MyBaseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return hasSafeArea
-        ? SafeArea(
+
+        /// This [GestureDetector] is for closing soft keyboard when touching anywhere
+        /// of the device. specially in IOS
+        ? GestureDetector(
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: SafeArea(
+              child: PlatformScaffold(
+                scaffoldKey: scaffoldKey,
+                backgroundColor: backgroundColor,
+                appBar: platformAppBar,
+                drawer: drawer,
+                body: hasScrollView
+                    ? _buildResponsive()
+                    : _buildScrollableResponsive(),
+                bottomNavigationBar: bottomNavigationBar,
+              ),
+            ),
+          )
+
+        /// This [GestureDetector] is for closing soft keyboard when touching anywhere
+        /// of the device. specially in IOS
+        : GestureDetector(
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
             child: PlatformScaffold(
               scaffoldKey: scaffoldKey,
               backgroundColor: backgroundColor,
               appBar: platformAppBar,
               drawer: drawer,
               body: hasScrollView
-                  ? _buildWithScrollView()
-                  : _buildWithoutScrollView(),
+                  ? _buildResponsive()
+                  : _buildScrollableResponsive(),
               bottomNavigationBar: bottomNavigationBar,
             ),
-          )
-        : PlatformScaffold(
-            scaffoldKey: scaffoldKey,
-            backgroundColor: backgroundColor,
-            appBar: platformAppBar,
-            drawer: drawer,
-            body: hasScrollView
-                ? _buildWithScrollView()
-                : _buildWithoutScrollView(),
-            bottomNavigationBar: bottomNavigationBar,
           );
   }
 
-  Widget _buildWithoutScrollView() {
+  Widget _buildScrollableResponsive() {
     return MyResponsive(
       mobile: mobileChild,
       tablet: tabletChild ?? mobileChild,
@@ -61,7 +77,7 @@ class MyBaseWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildWithScrollView() {
+  Widget _buildResponsive() {
     return SingleChildScrollView(
       child: MyResponsive(
         mobile: mobileChild,
